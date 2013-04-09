@@ -12,17 +12,17 @@
 
 模块包含如下两条指令：
 
-* alog_set
+### alog_set
 
-格式：alog_set [file_path] [log_level] [buffer_size]
-说明：本指令只能出现在http中。[log_level]和[buffer_size]可选，默认日志结拜为info，默认缓冲大小为0.
-例子：alog_set /usr/local/nginx/logs/test.log info 32k;
+* 格式：alog_set [file_path] [log_level] [buffer_size]
+* 说明：本指令只能出现在http中。[log_level]和[buffer_size]可选，默认日志结拜为info，默认缓冲大小为0.
+* 例子：alog_set /usr/local/nginx/logs/test.log info 32k;
 
-* alog
+### alog
 
-格式：alog [log_level] [log_msg] [flush]
-说明：[flush]可选，如果需要强制刷新，输入“flush”。其中[log_msg]既可以为原始字符串，也可以为Nginx变量。日志以行为单位记录，会自动追加换行符。
-例子：alog info “Hello World”；
+* 格式：alog [log_level] [log_msg] [flush]
+* 说明：[flush]可选，如果需要强制刷新，输入“flush”。其中[log_msg]既可以为原始字符串，也可以为Nginx变量。日志以行为单位记录，会自动追加换行符。
+* 例子：alog info “Hello World”；
 
 ## 例子：
 
