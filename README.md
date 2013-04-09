@@ -30,7 +30,7 @@
 ...
 
 http {
-  alog_set /export/servers/openresty/nginx/logs/clickstream.log info 1M;
+  alog_set /export/servers/openresty/nginx/logs/clickstream.log info 32k;
 
   ...
 
