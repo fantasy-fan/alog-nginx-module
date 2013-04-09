@@ -21,7 +21,7 @@
 * alog
 
 格式：alog [log_level] [log_msg] [flush]
-说明：[flush]可选，如果需要强制刷新，输入“flush”。其中[log_msg]既可以为原始字符串，也可以为Nginx变量。
+说明：[flush]可选，如果需要强制刷新，输入“flush”。其中[log_msg]既可以为原始字符串，也可以为Nginx变量。日志以行为单位记录，会自动追加换行符。
 例子：alog info “Hello World”；
 
 ## 例子：
@@ -49,7 +49,42 @@ http {
 }
 ```
 
+```C
+...
+
+http {
+  alog_set /export/servers/openresty/nginx/logs/clickstream.log info 1M;
+
+  ...
+
+  server {
+    listen 80;
+
+    ...
+
+    location /log {
+      access_log off;
+      set $u_log "Hello World";
+      alog info $u_log;
+      
+      access_by_lua '
+          ngx.location.capture("/log2") 
+      ';
+      ...
+    }
+    
+    location /log2 {
+      log_subrequest on;
+      log info "log test";
+      ...
+    }
+  }
+}
+```
+
 ## 说明
+
+本模块主要用于学习用途，经过了我自己的初步测试，如果使用请详尽测试，欢迎报告bug。
 
 最初并无再写一个日志模块的意愿，毕竟Nginx自带的日志模块已经很好用了。但是在利用Nginx记点击流日志时，发现一个问题无法解决。点击流日志分隔符，我效仿网上一篇文章用了Ascii不可见字符^A。测试中发现如果直接将^A写入log_format，则日志打印没有问题；但如果在lua中对输入字符串进行处理（比如原先分隔符是|，替换为^A），最终经过nginx打印，会发现打印出的不是^A，而是\x001。经过调研发现，似乎是Nginx的日志模块对Ascii字符进行了转义，颇让人为难。
 
