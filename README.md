@@ -21,7 +21,7 @@
 ### alog
 
 * 格式：alog [log_level] [log_msg] [flush]
-* 说明：[flush]可选，如果需要强制刷新，输入“flush”。其中[log_msg]既可以为原始字符串，也可以为Nginx变量。日志以行为单位记录，会自动追加换行符。
+* 说明：本指令只能出现在location中。[flush]可选，如果需要强制刷新，输入“flush”。其中[log_msg]既可以为原始字符串，也可以为Nginx变量。日志以行为单位记录，会自动追加换行符。
 * 例子：alog info “Hello World”；
 
 ## 例子：
