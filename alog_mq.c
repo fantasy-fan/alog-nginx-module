@@ -108,7 +108,7 @@ void alog_mq_pop(alog_mq_t *mq, alog_mq_msg_t **mq_msg)
 {
         alog_mq_msg_t *msg;
 
-        if (mq == NULL || (*mq_msg) == NULL) {
+        if (mq == NULL) {
                 return;
         }
         
