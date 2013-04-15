@@ -490,7 +490,7 @@ static ngx_int_t ngx_http_alog_init(ngx_conf_t *cf)
 static void* disk_write_thread(void* para)
 {
         while (!alog_log_thread_ctx.stop) {
-                alog_mq_msg_t *mq_msg = NULL;
+                alog_mq_msg_t *mq_msg;
                 alog_mq_pop(alog_log_thread_ctx.mq, &mq_msg);
 
                 if (mq_msg != NULL) {
