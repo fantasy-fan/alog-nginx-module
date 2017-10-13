@@ -240,7 +240,7 @@ static void *ngx_http_alog_create_main_conf(ngx_conf_t *cf)
     conf = ngx_pcalloc(cf->pool, sizeof(ngx_http_alog_main_conf_t));
 
     if (conf == NULL) {
-            return NULL;
+        return NULL;
     }
 
     /*
@@ -263,7 +263,7 @@ static void *ngx_http_alog_create_loc_conf(ngx_conf_t *cf)
     conf = ngx_pcalloc(cf->pool, sizeof(ngx_http_alog_loc_conf_t));
 
     if (conf == NULL) {
-            return NULL;
+        return NULL;
     }
 
     /*
@@ -479,7 +479,7 @@ static ngx_int_t ngx_http_alog_init(ngx_conf_t *cf)
     h = ngx_array_push(&cmcf->phases[NGX_HTTP_LOG_PHASE].handlers);
 
     if (h == NULL) {
-            return NGX_ERROR;
+        return NGX_ERROR;
     }
 
     *h = ngx_http_alog_handler;
@@ -553,10 +553,10 @@ static void ngx_http_alog_process_exit(ngx_cycle_t *cycle)
     }
 
     if (lmcf->buf_size != 0 && lmcf->log_buf.pos != lmcf->log_buf.start) {
-            write_bytes = lmcf->log_buf.pos - lmcf->log_buf.start;
-            write(alog_log_thread_ctx.log_file->fd, lmcf->log_buf.start, write_bytes);
+		write_bytes = lmcf->log_buf.pos - lmcf->log_buf.start;
+		write(alog_log_thread_ctx.log_file->fd, lmcf->log_buf.start, write_bytes);
 
-            lmcf->log_buf.pos = lmcf->log_buf.start;
+		lmcf->log_buf.pos = lmcf->log_buf.start;
     }
 
     alog_mq_release(alog_log_thread_ctx.mq);

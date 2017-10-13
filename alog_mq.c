@@ -5,8 +5,7 @@ alog_mq_t *alog_mq_create(ngx_cycle_t *cycle)
 {
     alog_mq_t *alog_mq;
     alog_mq = ngx_pcalloc(cycle->pool, sizeof(alog_mq_t));
-    if (alog_mq == NULL)
-    {
+    if (alog_mq == NULL) {
         return NULL;
     }
 
@@ -20,8 +19,7 @@ alog_mq_t *alog_mq_create(ngx_cycle_t *cycle)
 
 void alog_mq_release(alog_mq_t *mq)
 {
-    if (mq == NULL)
-    {
+    if (mq == NULL) {
         return;
     }
 
@@ -75,17 +73,13 @@ void alog_mq_pop(alog_mq_t *mq, alog_mq_msg_t **mq_msg)
 
     pthread_mutex_lock(&mq->lock);
 
-    while (ngx_queue_empty(&mq->queue))
-    {
+    while (ngx_queue_empty(&mq->queue)) {
         pthread_cond_wait(&mq->cond, &mq->lock);
     }
 
     q = ngx_queue_last(&mq->queue);
-
     it=ngx_queue_data(q, alog_mq_msg_t, queue);
-
-    if (it)
-    {
+    if (it) {
         *mq_msg = it;
     }
     ngx_queue_remove(q);
